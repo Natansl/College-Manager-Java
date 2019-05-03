@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import br.ufop.components.SchoolActivity;
 import br.ufop.components.SchoolClass;
 
@@ -30,7 +32,9 @@ public class RegisterScreen extends AppCompatActivity {
                     int v_MaxAbs = Integer.parseInt(findViewById(R.id.TEMaxAbsences).toString());
 
                     SchoolClass v_NewClass = new SchoolClass(v_Name,60.0,0.00,v_ObjGrade,0,v_MaxAbs);
-                    //TODO add class in parent array;
+
+                    HashMap<String,SchoolClass> v_Classes = (HashMap<String,SchoolClass>)getIntent().getExtras().get("Classes");
+                    v_Classes.put(v_NewClass.getName(),v_NewClass);
 
                 }catch (NumberFormatException e){
                     Toast.makeText(RegisterScreen.this,"Invalid number in objective grade or maximum absences",Toast.LENGTH_LONG).show();

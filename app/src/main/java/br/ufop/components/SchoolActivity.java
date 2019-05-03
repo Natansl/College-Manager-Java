@@ -1,12 +1,15 @@
 package br.ufop.components;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
 import br.ufop.Exceptions.PassedDateException;
 import br.ufop.Exceptions.ValueOutOfBoundsException;
 import br.ufop.modules.InitialScreen;
 
-public class SchoolActivity {
+public class SchoolActivity implements Parcelable {
     private SchoolClass m_Class;
     private double m_Value;
     private Calendar m_Deadline;
@@ -50,5 +53,15 @@ public class SchoolActivity {
         else{
             return 0.00;
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

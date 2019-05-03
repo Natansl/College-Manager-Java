@@ -1,6 +1,19 @@
 package br.ufop.components;
 
-public class SchoolClass {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SchoolClass implements Parcelable {
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator<SchoolClass>(){
+        public SchoolClass createFromParcel(Parcel p_Parcel){
+            return new SchoolClass(p_Parcel);
+        }
+
+        @Override
+        public SchoolClass[] newArray(int size) {
+            return new SchoolClass[0];
+        }
+    };
     private String m_Name;
     private double m_ClassGrade, m_ClassMinGrade, m_ClassObjGrade;
     private int m_ClassAbsences, m_ClassMaxAbsenses;
@@ -12,6 +25,10 @@ public class SchoolClass {
         m_ClassObjGrade = p_ClassObjGrade;
         m_ClassAbsences = p_ClassAbsences;
         m_ClassMaxAbsenses = p_ClassMaxAbsenses;
+    }
+
+    private SchoolClass(Parcel p_Parcel){
+        this(p_Parcel.readString(),p_Parcel.readDouble(),p_Parcel.readDouble(),p_Parcel.readDouble(),p_Parcel.readInt(),p_Parcel.readInt());
     }
 
     public String getName() {
@@ -30,11 +47,11 @@ public class SchoolClass {
         return m_ClassObjGrade;
     }
 
-    public int getClassAbsenses() {
+    public int getClassAbsences() {
         return m_ClassAbsences;
     }
 
-    public int getClassMaxAbsenses() {
+    public int getClassMaxAbsences() {
         return m_ClassMaxAbsenses;
     }
 
@@ -54,11 +71,26 @@ public class SchoolClass {
         this.m_ClassObjGrade = p_ClassObjGrade;
     }
 
-    public void setClassAbsenses(int p_ClassAbsenses) {
+    public void setClassAbsences(int p_ClassAbsenses) {
         this.m_ClassAbsences = p_ClassAbsenses;
     }
 
-    public void setClassMaxAbsenses(int p_ClassMaxAbsenses) {
+    public void setClassMaxAbsences(int p_ClassMaxAbsenses) {
         this.m_ClassMaxAbsenses = p_ClassMaxAbsenses;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getName());
+        dest.writeDouble(getClassMinGrade());
+        dest.writeDouble(getClassGrade());
+        dest.writeDouble(getClassObjGrade());
+        dest.writeInt(getClassAbsences());
+        dest.writeInt(getClassMaxAbsences());
     }
 }

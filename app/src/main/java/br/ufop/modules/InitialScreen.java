@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -30,6 +31,8 @@ public class InitialScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent v_Transition = new Intent(InitialScreen.this,RegisterScreen.class);
+                //v_Transition.putParcelableArrayListExtra("Classes",(ArrayList<SchoolClass>)m_Classes.values());
+                v_Transition.putExtra("Classes",m_Classes);
                 startActivity(v_Transition);
             }
         });
