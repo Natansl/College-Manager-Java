@@ -11,7 +11,7 @@ public class SchoolClass implements Parcelable {
 
         @Override
         public SchoolClass[] newArray(int size) {
-            return new SchoolClass[0];
+            return new SchoolClass[size];
         }
     };
     private String m_Name;

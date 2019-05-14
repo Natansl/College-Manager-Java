@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -21,29 +19,23 @@ public class InitialScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inicial_Screen);
-        addButtonListeners();
+        setContentView(R.layout.inicial_screen);
     }
 
-    public void addButtonListeners(){
-        Button v_Button = findViewById(R.id.btRegisterClass);
-        v_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent v_Transition = new Intent(InitialScreen.this,RegisterScreen.class);
-                //v_Transition.putParcelableArrayListExtra("Classes",(ArrayList<SchoolClass>)m_Classes.values());
-                v_Transition.putExtra("Classes",m_Classes);
-                startActivity(v_Transition);
-            }
-        });
-
-        v_Button = findViewById(R.id.btSeeClasses);
-        v_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent v_Transition = new Intent (InitialScreen.this, AccessScreen.class);
-                startActivity(v_Transition);
-            }
-        });
+    public void seeClasses (View v){
+        Intent v_Intent = new Intent(InitialScreen.this,AccessClassesScreen.class);
+        Bundle v_Extras = new Bundle();
+        v_Extras.putSerializable("ClassMap", m_Classes);
+        v_Intent.putExtras(v_Extras);
+        startActivity(v_Intent);
     }
+
+    public void seeActivities (View v){
+        Intent v_Intent = new Intent(InitialScreen.this,AccessActivitiesScreen.class);
+        Bundle v_Extras = new Bundle();
+        v_Extras.putSerializable("ActivitiesMap", m_Activities);
+        v_Intent.putExtras(v_Extras);
+        startActivity(v_Intent);
+    }
+
 }
